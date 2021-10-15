@@ -1,0 +1,23 @@
+>>>-----> lsys2.l initial ABC demos
+
+X:1
+T:Stochastic L-System I - production from generate-L & algae-map in lsys2.l
+M:C
+L:1/4
+K:C
+C D C D E D E F E F E D E D C B C B C D C D E D E D C B C B A B A B C B C B A
+G A B A B C B A B A B A G A B A B A G |
+
+X:1
+T:Stochastic L-System II - production from lsys2demo1 in generator.l
+M:C
+L:1/4
+K:C
+F1/2 F1/2 D E A E A G C A G C A G C A G C A G C A E A G C A G C A G C A G C A E A G F1/2 F1/2 D E A G C A E A G C A G C A G C A E A E A G F1/2 F1/2 D E A G F1/2 F1/2 D E A G C A G C A G F D E A G C A G C A G C A E A G F D E A G C A G C A G F1/2 F1/2 D E A E A E A E A G F1/2 F1/2 D E A G F1/2 F1/2 D E A G F D E A E A G C A G C A E A E A E A G F1/2 F1/2 D E A G C A G C A E A G F D E A G C A G C A E A G F1/2 F1/2 D E A G C A G C A G C A E A G C A G C A G C A G C A E A G F1/2 F1/2 D E A E A E A E A G F1/2 F1/2 D E A G F1/2 F1/2 D E A G F1/2 F1/2 D E A E  |
+
+X:1
+T:Stochastic L-System III - production from lsys2demo1 in generator.l
+M:C
+L:1/4
+K:C
+F1/2 F1/2 D E A E A E A G C A G C A E A G C A E A G C A G C A E A E A G C A G C A E A G C A G C A G C A G C A E A G C A G C A G F D E A E A E A G F1/2 F1/2 D E A E A G F1/2 F1/2 D E A E A G F1/2 F1/2 D E A E A G C A G C A G C A G C A G C A G C A E A E A G C A G C A G C A E A G C A E A G C A E A G F1/2 F1/2 D E A G C A G C A G C A G C A G C A E A G C A G C A E A E A G F1/2 F1/2 D E A G C A G C A G F D E A G F1/2 F1/2 D E A E A E A G C A G C A E A G C A G C A G C A E A E A G F1/2 F1/2 D E A E A G F1/2 F1/2 D E A G F1/2 F1/2 D E A E  |

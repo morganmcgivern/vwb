@@ -1,0 +1,29 @@
+-- productions of fibonaccinotes in generator.l from fibfractal.l--
+
+X:1
+T:Fibonaccinotes
+M:C
+L:1/4
+K:C
+B B E D  | E1/2 C E B1/2  | A1/2 A D B  | B A2 F1/2 F1/2  | C1/2 D2 A D1/2  | A1/2 B1/2 E D  | E D C1/2 G  | C B1/2 D1/2 C  | B F2 D D  | D1/2 D2 E1/2 F1/2  | D D E2 C  | ]
+
+X:1
+T:Fibonaccinotes2
+M:C
+L:1/4
+K:C
+B G B1/2 G  | D1/2 F D E  | D B2 B2 A  | E1/2 C D1/2 D2  | C F D B1/2  | B C A C1/2  | E1/2 C2 D A  | E D1/2 D2 B1/2  | B D D1/2 E  | B1/2 B D D  | D E F C1/2  |
+
+X:1
+T:Fibonaccinotes3
+M:C
+L:1/4
+K:C
+F B1/2 F1/2 E1/2  | C D1/2 C2 B  | G2 E1/2 D A1/2  | E1/2 A1/2 C E  | D D B E2  | C1/2 F1/2 D E  | D D1/2 B1/2 E1/2  | A E1/2 B E  | E E C1/2 F1/2  | D1/2 D1/2 B1/2 C  | G1/2 D1/2 E1/2 B  |
+
+X:1
+T:Fibonaccinotes4
+M:C
+L:1/4
+K:C
+C1/2 C B F  | E G B A  | F1/2 A1/2 B C  | F1/2 A A2 E  | D D C1/2 B  | C1/2 B D D  | A E1/2 C1/2 A1/2  | B1/2 B B D  | D F A F  | A1/2 C A E1/2  | E1/2 G E1/2 B  |

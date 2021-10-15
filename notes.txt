@@ -1,0 +1,79 @@
+C, D, E, F,|G, A, B, C|D E F G|A B c d|e f g a|b c' d' e'|f' g' a' b'|
+
+-1 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 1 1 1 1 1 1 1 2  2  2  2  2  2  2
+
+it can be represented like this internally
+Note Octave Length Flat/Sharp/Natural
+(C 0 4 N)
+->
+"Note (negative number, add commas, positive add apostrophes) (4 nothing quarter , /2 (or 1/2) for eighth, 2 for half)"
+
+^c _B =c
+
+;(describe func) to find doc string
+
+
+X:1
+T:Notes
+M:C
+L:1/4
+K:C
+C, D, E, F,|G, A, B, C|D E F G|A B c d|e f g a|b c' d' e'|f' g' a' b'|]
+
+
+; (defclass note ()
+;   ((pitch
+;     :initarg :C
+;     :accessor note)
+;    (octave
+;     :initform :0
+;     :accessor octave)
+;    (duration
+;     :initform :1/4
+;     :accessor duration)
+;    (octave
+;     :initform :nil
+;     :accessor octave)))
+
+
+[268]> (internal-to-abc (inc-fibonacci-notes 24))
+"C, B, D, A,  | C, B, B, A,  | B, C, B, D,  | F, E, D, D,  | B D2 A F  | A2 G E B  | D D E2 F  | B C B B  | A, G,2 E, B,  | C D B2 E  | B, E, G, A,  | E D D C  | B, D, A, F,  | B, D, A, F,  | B C B D2  | B C B D  | B,2 C, B, D,  | B C B D  | E, D, D, C,2  | B C B B  | G, A, B, B,  | B B A G  | B, C, B, B,  | E,2 G, A, B,  | B,2 E, G, A,  | "
+
+[270]> (internal-to-abc (inc-fibonacci-notes 24))
+"F, A,2 D, B,  | C, D, B, E,  | C D B E  | C, D, D, E,  | F A D B  | E F A D2  | E, B,2 D, C,  | B, B, A, G,2  | G, E, B, D,  | F A D B  | F, A, D, B,  | D, C, D, D,  | E,2 G, A, B,  | A, D, B, C,  | C D D E  | C, B, D, A,  | D, B, E, G,  | E G A2 B  | A, G, E, B,  | E B D C  | A, D, B, C,  | B B A2 G  | B A G E  | D E F A  | B E G A  | "
+
+--ABRACADABRA--
+(setf *rule-table* '(
+((A) (((A B) 1.0)))
+((B) (((R) 1.0)))
+((R) (((A) 1.0)))
+((B R A) (((A C) 1.0)))
+((R A) ((() 1.0)))
+
+((C) (((A) 1.0)))
+((A C A) (((A D) 1.0)))
+((C A) ((() 1.0)))
+((D) (((A) 1.0)))
+((A D A) (((A B) 1.0)))
+((D A) ((() 1.0)))
+))
+
+( ((C -1 1/4 NIL) (D -1 1/4 NIL) (E -1 1/4 NIL) (F -1 1/4 NIL)) )
+
+(setf *rule-table* '(
+  (((C 0 1/4 NIL)) ((((C 0 1/4 NIL) (A 0 1/4 NIL) (E 0 1/4 NIL)) 0.3)
+                    (((F 0 1/4 NIL) (D 0 1/4 NIL) (E 0 1/4 NIL)) 0.5)
+                    (((C 0 1/4 NIL) (A 0 1/4 NIL) (G 0 1/4 NIL) (C 0 1/4 NIL)) 1.000))
+                    )
+  (((A 0 1/4 NIL)) ((((A 0 1/4 NIL)) 1.0)))
+  (((E 0 1/4 NIL)) ((((E 0 1/4 NIL)) 1.0)))
+  (((G 0 1/4 NIL)) ((((G 0 1/4 NIL)) 1.0)))
+  (((D 0 1/4 NIL)) ((((D 0 1/4 NIL)) 1.0)))
+  (((F 0 1/4 NIL)) ((((F 0 1/2 NIL) (F 0 1/2 NIL)) 1.0)))
+  (((F 0 1/2 NIL)) ((((F 0 1/2 NIL)) 1.0)))
+))
+
+
+(setf *rule-table* '(
+(((B 0 1/4 NIL)) ((((B 0 1/4 NIL) (B 0 1/4 NIL)) 1.0)))
+))

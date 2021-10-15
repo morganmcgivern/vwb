@@ -1,0 +1,5 @@
+(with-open-file (stream "/logs/output.txt" :direction :output)
+  (format stream "weee")
+  (terpri stream)
+  (format stream "writing things")
+  )

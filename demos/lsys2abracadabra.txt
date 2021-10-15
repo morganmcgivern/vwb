@@ -1,0 +1,313 @@
+>>>-----> CONTEXT SENSTIVE L SYSTEM
+
+[184]> (demo-il1)
+ABRACADABRA RULE TABLE
+((A) (((A B) 1.0)))
+((B) (((R) 1.0)))
+((R) (((A) 1.0)))
+((B R A) (((A C) 1.0)))
+((R A) ((NIL 1.0))) << see why in the symbol lookup demo
+((C) (((A) 1.0)))
+((A C A) (((A D) 1.0)))
+((C A) ((NIL 1.0)))
+((D) (((A) 1.0)))
+((A D A) (((A B) 1.0)))
+((D A) ((NIL 1.0)))
+
+ABRACADABRA
+G0: (A)
+G1: (A B)
+G2: (A B R)
+G3: (A B R A)
+G4: (A B R A C)
+G5: (A B R A C A)
+G6: (A B R A C A D)
+G7: (A B R A C A D A)
+G8: (A B R A C A D A B)
+G9: (A B R A C A D A B R)
+G10: (A B R A C A D A B R A)
+G11: (A B R A C A D A B R A C)
+G12: (A B R A C A D A B R A C A)
+G13: (A B R A C A D A B R A C A D)
+G14: (A B R A C A D A B R A C A D A)
+G15: (A B R A C A D A B R A C A D A B)
+G16: (A B R A C A D A B R A C A D A B R)
+G17: (A B R A C A D A B R A C A D A B R A)
+G18: (A B R A C A D A B R A C A D A B R A C)
+G19: (A B R A C A D A B R A C A D A B R A C A)
+G20: (A B R A C A D A B R A C A D A B R A C A D)
+(A B R A C A D A B R A C A D A B R A C A D A)
+
+
+>>>-----> SYMBOL LOOKUP2
+
+In this demo-sl2, the 1l rules where it only looks at one symbol beside it do not differentiate to which side it sees yet
+for instance ((C A) ((NIL 1.0))) is triggered when at C there is an A to the right, and when at A there is a C to the left
+bug which may become feature?
+
+[185]> (demo-sl2)
+ABRACADABRA RULE TABLE
+((A) (((A B) 1.0)))
+((B) (((R) 1.0)))
+((R) (((A) 1.0)))
+((B R A) (((A C) 1.0)))
+((R A) ((NIL 1.0)))
+((C) (((A) 1.0)))
+((A C A) (((A D) 1.0)))
+((C A) ((NIL 1.0)))
+((D) (((A) 1.0)))
+((A D A) (((A B) 1.0)))
+((D A) ((NIL 1.0)))
+
+G0: (A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A NIL
+ G1: (A B)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B NIL
+ G2: (A B R)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 0l rule: ((R) (((A) 1.0))) at B R NIL
+ G3: (A B R A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 2l rule: ((R A) ((NIL 1.0))) at A
+G4: (A B R A C)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 0l rule: ((C) (((A) 1.0))) at A C NIL
+ G5: (A B R A C A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 2l rule: ((C A) ((NIL 1.0))) at A
+G6: (A B R A C A D)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 0l rule: ((D) (((A) 1.0))) at A D NIL
+ G7: (A B R A C A D A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 2l rule: ((D A) ((NIL 1.0))) at A
+G8: (A B R A C A D A B)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B NIL
+ G9: (A B R A C A D A B R)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 0l rule: ((R) (((A) 1.0))) at B R NIL
+ G10: (A B R A C A D A B R A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 2l rule: ((R A) ((NIL 1.0))) at A
+G11: (A B R A C A D A B R A C)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 0l rule: ((C) (((A) 1.0))) at A C NIL
+ G12: (A B R A C A D A B R A C A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 2l rule: ((C A) ((NIL 1.0))) at A
+G13: (A B R A C A D A B R A C A D)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 0l rule: ((D) (((A) 1.0))) at A D NIL
+ G14: (A B R A C A D A B R A C A D A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 2l rule: ((D A) ((NIL 1.0))) at A
+G15: (A B R A C A D A B R A C A D A B)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B NIL
+ G16: (A B R A C A D A B R A C A D A B R)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 0l rule: ((R) (((A) 1.0))) at B R NIL
+ G17: (A B R A C A D A B R A C A D A B R A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 2l rule: ((R A) ((NIL 1.0))) at A
+G18: (A B R A C A D A B R A C A D A B R A C)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 0l rule: ((C) (((A) 1.0))) at A C NIL
+ G19: (A B R A C A D A B R A C A D A B R A C A)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 2l rule: ((C A) ((NIL 1.0))) at A
+G20: (A B R A C A D A B R A C A D A B R A C A D)
+found 0l rule: ((A) (((A B) 1.0))) at NIL A B
+ found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 2l rule: ((A D A) (((A B) 1.0))) at D
+found 1l rule: ((D A) ((NIL 1.0))) at A
+found 0l rule: ((B) (((R) 1.0))) at A B R
+ found 2l rule: ((B R A) (((A C) 1.0))) at R
+found 1l rule: ((R A) ((NIL 1.0))) at A
+found 2l rule: ((A C A) (((A D) 1.0))) at C
+found 1l rule: ((C A) ((NIL 1.0))) at A
+found 0l rule: ((D) (((A) 1.0))) at A D NIL

@@ -1,0 +1,55 @@
+[1]> (load 'abctransmutator.l)
+;; Loading file abctransmutator.l ...
+;;  Loading file split-sequence.l ...
+;;  Loaded file split-sequence.l
+;;  Loading file lp.l ...
+;;  Loaded file lp.l
+;; Loaded file abctransmutator.l
+T
+[2]> (setf test "C, D, E, F,|G, A, B, C|D E F G|A B c d|e f g a|b c' d' e'|f' g' a' b'")
+"C, D, E, F,|G, A, B, C|D E F G|A B c d|e f g a|b c' d' e'|f' g' a' b'"
+[5]> (setf test1 (abc-to-internal test))
+(((C -1 1/4 NIL) (D -1 1/4 NIL) (E -1 1/4 NIL) (F -1 1/4 NIL))
+ ((G -1 1/4 NIL) (A -1 1/4 NIL) (B -1 1/4 NIL) (C 0 1/4 NIL)) ((D 0 1/4 NIL) (E 0 1/4 NIL) (F 0 1/4 NIL) (G 0 1/4 NIL))
+ ((A 0 1/4 NIL) (B 0 1/4 NIL) (C 1 1/4 NIL) (D 1 1/4 NIL)) ((E 1 1/4 NIL) (F 1 1/4 NIL) (G 1 1/4 NIL) (A 1 1/4 NIL))
+ ((B 1 1/4 NIL) (C 2 1/4 NIL) (D 2 1/4 NIL) (E 2 1/4 NIL)) ((F 2 1/4 NIL) (G 2 1/4 NIL) (A 2 1/4 NIL) (B 2 1/4 NIL)))
+[10]> (setf test2 (internal-to-abc test1))
+"C, D, E, F,  | G, A, B, C  | D E F G  | A B c d  | e f g a  | b c' d' e'  | f' g' a' b'  | "
+[11]> test
+"C, D, E, F,|G, A, B, C|D E F G|A B c d|e f g a|b c' d' e'|f' g' a' b'"
+[12]> test1
+(((C -1 1/4 NIL) (D -1 1/4 NIL) (E -1 1/4 NIL) (F -1 1/4 NIL))
+ ((G -1 1/4 NIL) (A -1 1/4 NIL) (B -1 1/4 NIL) (C 0 1/4 NIL)) ((D 0 1/4 NIL) (E 0 1/4 NIL) (F 0 1/4 NIL) (G 0 1/4 NIL))
+ ((A 0 1/4 NIL) (B 0 1/4 NIL) (C 1 1/4 NIL) (D 1 1/4 NIL)) ((E 1 1/4 NIL) (F 1 1/4 NIL) (G 1 1/4 NIL) (A 1 1/4 NIL))
+ ((B 1 1/4 NIL) (C 2 1/4 NIL) (D 2 1/4 NIL) (E 2 1/4 NIL)) ((F 2 1/4 NIL) (G 2 1/4 NIL) (A 2 1/4 NIL) (B 2 1/4 NIL)))
+[13]> test2
+"C, D, E, F,  | G, A, B, C  | D E F G  | A B c d  | e f g a  | b c' d' e'  | f' g' a' b'  | "
+[14]>
+
+// showing it does not break
+[19]> (internal-to-abc (mapcar #'random-permutation test1))
+"D, E, F, C,  | A, G, C B,  | D F E G  | B c A d  | f g a e  | e' c' d' b  | f' b' g' a'  | "
+[20]> (internal-to-abc (mapcar #'random-permutation test1))
+"E, D, F, C,  | C G, A, B,  | E F D G  | c d A B  | a g e f  | d' c' b e'  | a' g' b' f'  | "
+[21]> (internal-to-abc (mapcar #'random-permutation test1))
+"C, E, D, F,  | C A, B, G,  | G F E D  | d A c B  | f g a e  | d' e' c' b  | g' f' a' b'  | "
+[22]> (internal-to-abc (mapcar #'random-permutation test1))
+"F, D, E, C,  | C A, B, G,  | E D G F  | B d A c  | a f g e  | d' c' e' b  | f' b' g' a'  | "
+[23]> (internal-to-abc (mapcar #'random-permutation test1))
+"E, F, D, C,  | B, G, A, C  | G D F E  | B d c A  | e f a g  | c' b d' e'  | g' a' f' b'  | "
+[24]> (internal-to-abc (mapcar #'random-permutation test1))
+"F, D, E, C,  | G, C B, A,  | G F D E  | A d c B  | a f g e  | c' e' d' b  | f' a' g' b'  | "
+
+// with more complicated strings
+
+[28]> (setf test3 "C,,2 D,,4 E,1/2 F,|G, _A,1/2 B, C|D,,,,2 E F, G|A B,,, c d|e ^f'' =g a|b _c'''2 d' e'1/8|_f' g'1/2 a'1/2 b'2")
+"C,,2 D,,4 E,1/2 F,|G, _A,1/2 B, C|D,,,,2 E F, G|A B,,, c d|e ^f'' =g a|b _c'''2 d' e'1/8|_f' g'1/2 a'1/2 b'2"
+[29]> (abc-to-internal test3)
+(((C -2 2 NIL) (D -2 4 NIL) (E -1 1/2 NIL) (F -1 1/4 NIL)) ((G -1 1/4 NIL) (A -1 1/2 FLAT) (B -1 1/4 NIL) (C 0 1/4 NIL))
+ ((D -4 2 NIL) (E 0 1/4 NIL) (F -1 1/4 NIL) (G 0 1/4 NIL)) ((A 0 1/4 NIL) (B -3 1/4 NIL) (C 1 1/4 NIL) (D 1 1/4 NIL))
+ ((E 1 1/4 NIL) (F 3 1/4 SHARP) (G 1 1/4 NATURAL) (A 1 1/4 NIL)) ((B 1 1/4 NIL) (C 4 2 FLAT) (D 2 1/4 NIL) (E 2 1/8 NIL))
+ ((F 2 1/4 FLAT) (G 2 1/2 NIL) (A 2 1/2 NIL) (B 2 2 NIL)))
+[30]> (internal-to-abc (abc-to-internal test3))
+"C,,2 D,,4 E,1/2 F,  | G, _A,1/2 B, C  | D,,,,2 E F, G  | A B,,, c d  | e ^f'' =g a  | b _c'''2 d' e'1/8  | _f' g'1/2 a'1/2 b'2  | "
+[31]> test3
+"C,,2 D,,4 E,1/2 F,|G, _A,1/2 B, C|D,,,,2 E F, G|A B,,, c d|e ^f'' =g a|b _c'''2 d' e'1/8|_f' g'1/2 a'1/2 b'2"
